@@ -2,8 +2,11 @@ const PHOTO_FOLDER = 'photos/';
 const PHOTO_FORMAT = '.jpg';
 const AVATAR_FOLDER = 'img/avatar-';
 const AVATAR_FORMAT = '.svg';
+
 const PHOTOS_IDS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+
 const URLS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+
 const DESCRIPTIONS = [
   'Италия',
   'Тихий океан',
@@ -32,10 +35,8 @@ const DESCRIPTIONS = [
   'Релакс',
 ];
 
-const LIKES = [15, 25, 36, 41, 57, 68, 79, 88, 99, 100, 110, 129, 135, 144, 158, 169, 170, 186, 197, 195, 21, 22, 23, 24, 25];
-const COMMENTS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
 const COMMENTS_IDS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-const AVATARS = [1, 2, 3, 4, 5, 6];
+
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -44,6 +45,7 @@ const MESSAGES = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
+
 const NAMES = [
   'Роман',
   'Алексей',
@@ -64,7 +66,6 @@ function getRandomInteger(min, max) {
 
 function createRandomIdFromRangeGenerator(min, max) {
   const previousValues = [];
-
   return function () {
     let currentValue = getRandomInteger(min, max);
     if (previousValues.length >= (max - min + 1)) {
@@ -88,20 +89,20 @@ const createPhotos = () => ({
   photoId: createPhotosId(PHOTOS_IDS),
   url: (PHOTO_FOLDER + createUrl(URLS) + PHOTO_FORMAT),
   description: getRandomArrayElement(DESCRIPTIONS),
-  like: getRandomArrayElement(LIKES),
-  comment: getRandomArrayElement(COMMENTS)
+  like: getRandomInteger(15, 200),
+  comment: getRandomInteger(0, 30)
 });
 
 const createComments = () => ({
   commentId: createCommentId(COMMENTS_IDS),
-  avatar: (AVATAR_FOLDER + getRandomArrayElement(AVATARS) + AVATAR_FORMAT),
+  avatar: (AVATAR_FOLDER + getRandomInteger(1, 6) + AVATAR_FORMAT),
   message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES)
 });
 
-const photos = Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotos);
-const comments = Array.from({length: 1}, createComments);
+/*const photos =*/ Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotos);
+/*const comments =*/ Array.from({length: 1}, createComments);
 
 
-console.log(photos);
-console.log(comments);
+/*console.log(photos);
+console.log(comments);*/
