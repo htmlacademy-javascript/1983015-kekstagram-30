@@ -1,34 +1,10 @@
-const ID = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
-
-const URL = [
-  'photos/1.jpg',
-  'photos/2.jpg',
-  'photos/3.jpg',
-  'photos/4.jpg',
-  'photos/5.jpg',
-  'photos/6.jpg',
-  'photos/7.jpg',
-  'photos/8.jpg',
-  'photos/9.jpg',
-  'photos/10.jpg',
-  'photos/11.jpg',
-  'photos/12.jpg',
-  'photos/13.jpg',
-  'photos/14.jpg',
-  'photos/15.jpg',
-  'photos/16.jpg',
-  'photos/17.jpg',
-  'photos/18.jpg',
-  'photos/19.jpg',
-  'photos/20.jpg',
-  'photos/21.jpg',
-  'photos/22.jpg',
-  'photos/23.jpg',
-  'photos/24.jpg',
-  'photos/25.jpg',
-];
-
-const DESCRIPTION = [
+const PHOTO_FOLDER = 'photos/';
+const PHOTO_FORMAT = '.jpg';
+const AVATAR_FOLDER = 'img/avatar-';
+const AVATAR_FORMAT = '.svg';
+const PHOTOS_IDS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+const URLS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+const DESCRIPTIONS = [
   'Италия',
   'Тихий океан',
   'Девушка с цветами',
@@ -57,21 +33,75 @@ const DESCRIPTION = [
 ];
 
 const LIKES = [15, 25, 36, 41, 57, 68, 79, 88, 99, 100, 110, 129, 135, 144, 158, 169, 170, 186, 197, 195, 21, 22, 23, 24, 25];
+const COMMENTS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+const COMMENTS_IDS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+const AVATARS = [1, 2, 3, 4, 5, 6];
+const MESSAGES = [
+  'Всё отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+];
+const NAMES = [
+  'Роман',
+  'Алексей',
+  'София',
+  'Иван',
+  'Александр',
+  'Мария'
+];
 
-const COMMENTS = [];
-{
-  const ID = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+const PHOTO_DESCRIPTION_COUNT = 25;
 
-  const AVATAR = [img / avatar - 1.svg, img / avatar - 2.svg, img / avatar - 3.svg, img / avatar - 4.svg, img / avatar - 5.svg, img / avatar - 6.svg,];
-
-  const MESSAGE = [
-    'Всё отлично!',
-    'В целом всё неплохо. Но не всё.',
-    'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-    'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-    'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-    'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-  ];
-
-  const NAME = ['Роман', 'Алексей', 'София', 'Иван', 'Александр', 'Мария'];
+function getRandomInteger(min, max) {
+  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
+  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
 }
+
+function createRandomIdFromRangeGenerator(min, max) {
+  const previousValues = [];
+
+  return function () {
+    let currentValue = getRandomInteger(min, max);
+    if (previousValues.length >= (max - min + 1)) {
+      return null;
+    }
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(min, max);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
+}
+
+const createPhotosId = createRandomIdFromRangeGenerator(1, 25);
+const createUrl = createRandomIdFromRangeGenerator(1, 25);
+const createCommentId = createRandomIdFromRangeGenerator(1, 30);
+
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+
+const createPhotos = () => ({
+  photoId: createPhotosId(PHOTOS_IDS),
+  url: (PHOTO_FOLDER + createUrl(URLS) + PHOTO_FORMAT),
+  description: getRandomArrayElement(DESCRIPTIONS),
+  like: getRandomArrayElement(LIKES),
+  comment: getRandomArrayElement(COMMENTS)
+});
+
+const createComments = () => ({
+  commentId: createCommentId(COMMENTS_IDS),
+  avatar: (AVATAR_FOLDER + getRandomArrayElement(AVATARS) + AVATAR_FORMAT),
+  message: getRandomArrayElement(MESSAGES),
+  name: getRandomArrayElement(NAMES)
+});
+
+const photos = Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotos);
+const comments = Array.from({length: 1}, createComments);
+
+
+console.log(photos);
+console.log(comments);
