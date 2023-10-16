@@ -1,11 +1,9 @@
+// Входные данные
+
 const PHOTO_FOLDER = 'photos/';
 const PHOTO_FORMAT = '.jpg';
 const AVATAR_FOLDER = 'img/avatar-';
 const AVATAR_FORMAT = '.svg';
-
-const PHOTOS_IDS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
-
-const URLS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
 
 const DESCRIPTIONS = [
   'Италия',
@@ -35,8 +33,6 @@ const DESCRIPTIONS = [
   'Релакс',
 ];
 
-const COMMENTS_IDS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -55,8 +51,22 @@ const NAMES = [
   'Мария'
 ];
 
+// Необходимое количество сгенерированных объектов
 const PHOTO_DESCRIPTION_COUNT = 25;
 
+//Функция-генератор для получения уникальных идентификаторов
+function createIdGenerator () {
+  let lastGeneratedId = 0;
+  return function () {
+    lastGeneratedId += 1;
+    return lastGeneratedId;
+  };
+}
+const generatePhotoId = createIdGenerator();
+const generateCommentId = createIdGenerator();
+const generatePhotoUrl = createIdGenerator();
+
+// Функция получения целого числа из переданного диапазона
 function getRandomInteger(min, max) {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
@@ -64,45 +74,28 @@ function getRandomInteger(min, max) {
   return Math.floor(result);
 }
 
-function createRandomIdFromRangeGenerator(min, max) {
-  const previousValues = [];
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-    if (previousValues.length >= (max - min + 1)) {
-      return null;
-    }
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
-  };
-}
-
-const createPhotosId = createRandomIdFromRangeGenerator(1, 25);
-const createUrl = createRandomIdFromRangeGenerator(1, 25);
-const createCommentId = createRandomIdFromRangeGenerator(1, 30);
-
+// Функция-генератор для получения случайных идентификаторов из указанного диапазона
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const createPhotos = () => ({
-  photoId: createPhotosId(PHOTOS_IDS),
-  url: (PHOTO_FOLDER + createUrl(URLS) + PHOTO_FORMAT),
-  description: getRandomArrayElement(DESCRIPTIONS),
-  like: getRandomInteger(15, 200),
-  comment: getRandomInteger(0, 30)
-});
-
+// Комментарий, оставленный другим пользователем фотографии.
 const createComments = () => ({
-  commentId: createCommentId(COMMENTS_IDS),
+  commentId: generateCommentId(),
   avatar: (AVATAR_FOLDER + getRandomInteger(1, 6) + AVATAR_FORMAT),
   message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES)
 });
 
-/*const photos =*/ Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotos);
-/*const comments =*/ Array.from({length: 1}, createComments);
+// Объект, описания фотографии, опубликованной пользователем
+const createPhotos = () => ({
+  photoId: generatePhotoId(),
+  url: (PHOTO_FOLDER + generatePhotoUrl() + PHOTO_FORMAT),
+  description: getRandomArrayElement(DESCRIPTIONS),
+  like: getRandomInteger(15, 200),
+  comment:(Array.from({length: getRandomInteger(0, 30)}, createComments))
+});
 
+// Создание массива из 25 сгенерированных объектов (описание фотографии)
+/*const photos = */Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotos);
 
-/*console.log(photos);
-console.log(comments);*/
+//console.log(photos);
+
