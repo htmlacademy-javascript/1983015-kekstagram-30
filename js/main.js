@@ -78,7 +78,7 @@ const getRandomInteger = (min, max) => {
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 // Комментарий, оставленный другим пользователем фотографии.
-const createComments = () => ({
+const createComment = () => ({
   commentId: generateCommentId(),
   avatar: (AVATAR_FOLDER + getRandomInteger(1, 6) + AVATAR_FORMAT),
   message: getRandomArrayElement(MESSAGES),
@@ -86,16 +86,16 @@ const createComments = () => ({
 });
 
 // Объект, описания фотографии, опубликованной пользователем
-const createPhotos = () => ({
+const createPhoto = () => ({
   photoId: generatePhotoId(),
   url: (PHOTO_FOLDER + generatePhotoUrl() + PHOTO_FORMAT),
   description: getRandomArrayElement(DESCRIPTIONS),
   like: getRandomInteger(15, 200),
-  comment:(Array.from({length: getRandomInteger(0, 30)}, createComments))
+  comment:(Array.from({length: getRandomInteger(0, 30)}, createComment))
 });
 
 // Создание массива из 25 сгенерированных объектов (описание фотографии)
-/*const photos =*/ Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotos);
+/*const createPhotos = () =>*/ Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhoto);
 
-//console.log(photos);
+//console.log(createPhotos());
 
