@@ -95,7 +95,7 @@ const createPhotos = () => ({
 });
 
 // Создание массива из 25 сгенерированных объектов (описание фотографии)
-const photos = Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotos);
+/*const photos =*/ Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotos);
 
-console.log(photos);
+//console.log(photos);
 
