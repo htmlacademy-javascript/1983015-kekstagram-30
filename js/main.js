@@ -67,12 +67,12 @@ const generateCommentId = createIdGenerator();
 const generatePhotoUrl = createIdGenerator();
 
 // Функция получения целого числа из переданного диапазона
-function getRandomInteger(min, max) {
+const getRandomInteger = (min, max) => {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
-}
+};
 
 // Функция-генератор для получения случайных идентификаторов из указанного диапазона
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
@@ -95,7 +95,7 @@ const createPhotos = () => ({
 });
 
 // Создание массива из 25 сгенерированных объектов (описание фотографии)
-/*const photos = */Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotos);
+const photos = Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotos);
 
-//console.log(photos);
+console.log(photos);
 
