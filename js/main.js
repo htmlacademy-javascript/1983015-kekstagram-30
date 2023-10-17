@@ -4,6 +4,12 @@ const PHOTO_FOLDER = 'photos/';
 const PHOTO_FORMAT = '.jpg';
 const AVATAR_FOLDER = 'img/avatar-';
 const AVATAR_FORMAT = '.svg';
+const LIKE_MIN_QUANTITY = 15;
+const LIKE_MAX_QUANTITY = 200;
+const COMMENTS_MIN_QUANTITY = 0;
+const COMMENTS_MAX_QUANTITY = 30;
+const AVATAR_MIN_NUMBER = 1;
+const AVATAR_MAX_NUMBER = 6;
 
 const DESCRIPTIONS = [
   'Италия',
@@ -55,7 +61,7 @@ const NAMES = [
 const PHOTO_DESCRIPTION_COUNT = 25;
 
 //Функция-генератор для получения уникальных идентификаторов
-function createIdGenerator () {
+function createIdGenerator() {
   let lastGeneratedId = 0;
   return function () {
     lastGeneratedId += 1;
@@ -80,7 +86,7 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 // Комментарий, оставленный другим пользователем фотографии.
 const createComment = () => ({
   commentId: generateCommentId(),
-  avatar: (AVATAR_FOLDER + getRandomInteger(1, 6) + AVATAR_FORMAT),
+  avatar: (AVATAR_FOLDER + getRandomInteger(AVATAR_MIN_NUMBER, AVATAR_MAX_NUMBER) + AVATAR_FORMAT),
   message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES)
 });
@@ -90,12 +96,11 @@ const createPhoto = () => ({
   photoId: generatePhotoId(),
   url: (PHOTO_FOLDER + generatePhotoUrl() + PHOTO_FORMAT),
   description: getRandomArrayElement(DESCRIPTIONS),
-  like: getRandomInteger(15, 200),
-  comment:(Array.from({length: getRandomInteger(0, 30)}, createComment))
+  like: getRandomInteger(LIKE_MIN_QUANTITY, LIKE_MAX_QUANTITY),
+  comment: (Array.from({ length: getRandomInteger(COMMENTS_MIN_QUANTITY, COMMENTS_MAX_QUANTITY) }, createComment))
 });
 
 // Создание массива из 25 сгенерированных объектов (описание фотографии)
-/*const createPhotos = () =>*/ Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhoto);
-
-//console.log(createPhotos());
+const createPhotos = () => Array.from({ length: PHOTO_DESCRIPTION_COUNT }, createPhoto);
+createPhotos();
 
