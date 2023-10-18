@@ -1,7 +1,7 @@
 //Функция-генератор для получения уникальных идентификаторов
 function createIdGenerator() {
   let lastGeneratedId = 0;
-  return function () {
+  return () => {
     lastGeneratedId += 1;
     return lastGeneratedId;
   };
