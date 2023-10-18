@@ -3,10 +3,10 @@ import {getRandomInteger} from './util.js';
 import {getRandomArrayElement} from './util.js';
 
 // Входные данные
-const AVATAR_FOLDER = 'img/avatar-';
-const AVATAR_FORMAT = '.svg';
 const AVATAR_MIN_NUMBER = 1;
 const AVATAR_MAX_NUMBER = 6;
+const MIN_MESSAGE = 1;
+const MAX_MESSAGE = 2;
 
 const MESSAGES = [
   'Всё отлично!',
@@ -26,11 +26,13 @@ const NAMES = [
   'Мария'
 ];
 
+const createMessage = () => Array.from({length: getRandomInteger(MIN_MESSAGE, MAX_MESSAGE)}, () => getRandomArrayElement(MESSAGES)).join(' ');
+
 // Комментарий, оставленный другим пользователем фотографии.
 const createComment = () => ({
   commentId: generateCommentId(),
-  avatar: (AVATAR_FOLDER + getRandomInteger(AVATAR_MIN_NUMBER, AVATAR_MAX_NUMBER) + AVATAR_FORMAT),
-  message: getRandomArrayElement(MESSAGES),
+  avatar: `img/avatar-${getRandomInteger(AVATAR_MIN_NUMBER, AVATAR_MAX_NUMBER)}.svg`,
+  message: createMessage(),
   name: getRandomArrayElement(NAMES)
 });
 
