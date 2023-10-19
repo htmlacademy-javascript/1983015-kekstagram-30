@@ -33,3 +33,44 @@ const extractNumber = (string) => {
 extractNumber('33 коровы');
 
 
+// Функция: Делу - время
+
+const makeTime = (startTime, endTime, timeMetting, durationMetting) => {
+  const minutesPerHour = 60;
+  const arrayStartTimes = startTime.split(':');
+  const arrayEndTimes = endTime.split(':');
+  const arrayTimeMettings = timeMetting.split(':');
+  const times = arrayStartTimes.concat(arrayEndTimes).concat(arrayTimeMettings);
+  const numTimes = [];
+  times.forEach((time) => {
+    numTimes.push(Number(time));
+  });
+  const numTimesMinutes = [];
+  for (let i = 0; i < numTimes.length; i++) {
+    numTimesMinutes[i] = numTimes[i];
+    if (i % 2 === 0) {
+      numTimesMinutes[i] = numTimes[i] * minutesPerHour;
+    }
+  }
+  const arrayStartTimesMinutes = numTimesMinutes.slice(0, 2);
+  const arrayEndTimesMinutes = numTimesMinutes.slice(2, 4);
+  const arrayTimeMettingsMinutes = numTimesMinutes.slice(4, 6);
+
+  const startTimesMinutes = arrayStartTimesMinutes.reduce((sum, current) => (sum + current), 0);
+  const endTimesMinutes = arrayEndTimesMinutes.reduce((sum, current) => (sum + current), 0);
+  const timeMettingsMinutes = arrayTimeMettingsMinutes.reduce((sum, current) => (sum + current), 0);
+
+  const timeEndMettingsMinutes = timeMettingsMinutes + durationMetting;
+
+  const result = (timeMettingsMinutes < endTimesMinutes &&
+    startTimesMinutes <= timeMettingsMinutes &&
+    timeEndMettingsMinutes <= endTimesMinutes) ? 'Встреча не выходит за рамки рабочего дня' : 'Встреча выходит за рамки рабочего дня';
+
+  return result;
+};
+console.log(makeTime('08:00', '17:30', '14:00', 90));
+console.log(makeTime('8:0', '10:0', '8:0', 120));
+console.log(makeTime('08:00', '14:30', '14:00', 90));
+console.log(makeTime('14:00', '17:30', '08:0', 90));
+console.log(makeTime('8:00', '17:30', '08:00', 900));
+
