@@ -64,6 +64,6 @@ const makeTime = (startTime, endTime, timeMetting, durationMetting) => {
   return (timeMettingsMinutes < endTimesMinutes && startTimesMinutes <= timeMettingsMinutes && timeEndMettingsMinutes <= endTimesMinutes);
 };
 
-makeTime('08:00', '17:30', '14:00', 90);
+makeTime('8:0', '10:0', '8:0', 120);
 
 
