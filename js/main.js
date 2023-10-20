@@ -1,3 +1,3 @@
 import {createPhotos} from './photo-description.js';
-
-console.log(createPhotos());
+const PHOTO_DESCRIPTION_COUNT = 25;
+createPhotos(PHOTO_DESCRIPTION_COUNT);

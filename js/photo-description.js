@@ -1,48 +1,16 @@
-import {generatePhotoId} from './fn-unique-id.js';
-import {generatePhotoUrl} from './fn-unique-id.js';
-import {getRandomInteger} from './util.js';
-import {getRandomArrayElement} from './util.js';
+import { DESCRIPTIONS } from './data.js';
+import {createIdGenerator} from './fn-unique-id.js';
+import {getRandomInteger, getRandomArrayElement} from './util.js';
 import {createComment} from './comment.js';
 
-// Входные данные
 const LIKE_MIN_QUANTITY = 15;
 const LIKE_MAX_QUANTITY = 200;
 const COMMENTS_MIN_QUANTITY = 0;
 const COMMENTS_MAX_QUANTITY = 30;
 
+const generatePhotoId = createIdGenerator();
+const generatePhotoUrl = createIdGenerator();
 
-const DESCRIPTIONS = [
-  'Италия',
-  'Тихий океан',
-  'Девушка с цветами',
-  'Хорошо в деревне',
-  'Закат',
-  'Рассвет',
-  'Луна',
-  'Извержение вулкана',
-  'Красное море',
-  'Пирамиды',
-  'Девушка в купальнике',
-  'Салон красоты',
-  'Горы',
-  'Клубника',
-  'Снег',
-  'Дождь',
-  'Осень',
-  'Весна',
-  'Лето',
-  'Зима',
-  'Радуга',
-  'Звездопад',
-  'Учеба',
-  'Отпуск',
-  'Релакс',
-];
-
-// Необходимое количество сгенерированных объектов
-const PHOTO_DESCRIPTION_COUNT = 25;
-
-// Объект, описания фотографии, опубликованной пользователем
 const createPhoto = () => ({
   photoId: generatePhotoId(),
   url: `photos/${generatePhotoUrl()}.jpg`,
@@ -51,8 +19,7 @@ const createPhoto = () => ({
   comment: (Array.from({ length: getRandomInteger(COMMENTS_MIN_QUANTITY, COMMENTS_MAX_QUANTITY) }, createComment))
 });
 
-// Создание массива из 25 сгенерированных объектов (описание фотографии)
-const createPhotos = () => Array.from({ length: PHOTO_DESCRIPTION_COUNT }, createPhoto);
+const createPhotos = (count) => Array.from({ length: count}, createPhoto);
 
 export {createPhotos};
 
