@@ -34,7 +34,6 @@ extractNumber('33 коровы');
 
 
 // Функция: Делу - время
-
 const makeTime = (startTime, endTime, timeMetting, durationMetting) => {
   const minutesPerHour = 60;
   const arrayStartTimes = startTime.split(':');
@@ -62,15 +61,9 @@ const makeTime = (startTime, endTime, timeMetting, durationMetting) => {
 
   const timeEndMettingsMinutes = timeMettingsMinutes + durationMetting;
 
-  const result = (timeMettingsMinutes < endTimesMinutes &&
-    startTimesMinutes <= timeMettingsMinutes &&
-    timeEndMettingsMinutes <= endTimesMinutes) ? 'Встреча не выходит за рамки рабочего дня' : 'Встреча выходит за рамки рабочего дня';
-
-  return result;
+  return (timeMettingsMinutes < endTimesMinutes && startTimesMinutes <= timeMettingsMinutes && timeEndMettingsMinutes <= endTimesMinutes);
 };
-console.log(makeTime('08:00', '17:30', '14:00', 90));
-console.log(makeTime('8:0', '10:0', '8:0', 120));
-console.log(makeTime('08:00', '14:30', '14:00', 90));
-console.log(makeTime('14:00', '17:30', '08:0', 90));
-console.log(makeTime('8:00', '17:30', '08:00', 900));
+
+makeTime('08:00', '17:30', '14:00', 90);
+
 
