@@ -2,7 +2,7 @@ import { createPhotos } from './photo-description.js';
 
 const pictures = document.querySelector('.pictures');
 
-const pictureTemplate = document.querySelectorAll('#picture')
+const pictureTemplate = document.querySelector('#picture')
   .content.querySelector('.picture');
 
 const drawsPicture = createPhotos();
