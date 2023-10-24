@@ -1,5 +1,5 @@
 import { MESSAGES, NAMES } from './data.js';
-import {createIdGenerator} from './fn-unique-id.js';
+import {createIdGenerator} from './create-id-generator.js';
 import {getRandomInteger, getRandomArrayElement} from './util.js';
 
 const AVATAR_MIN_NUMBER = 1;
