@@ -1,8 +1,8 @@
-import {createPhotos} from './create-photos';
-createPhotos();
+import {createPhotos, PHOTO_DESCRIPTION_COUNT} from './create-photos.js';
 
 import { renderPictures } from './render-pictures.js';
-renderPictures();
+renderPictures(createPhotos(PHOTO_DESCRIPTION_COUNT));
 
-import './overlay-big-picture';
+
+import './overlay-big-picture.js';
 

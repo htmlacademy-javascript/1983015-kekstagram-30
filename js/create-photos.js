@@ -7,9 +7,7 @@ const LIKE_MIN_QUANTITY = 15;
 const LIKE_MAX_QUANTITY = 200;
 const COMMENTS_MIN_QUANTITY = 0;
 const COMMENTS_MAX_QUANTITY = 30;
-
 const PHOTO_DESCRIPTION_COUNT = 25;
-
 
 const generatePhotoId = createIdGenerator();
 const generatePhotoUrl = createIdGenerator();
@@ -24,5 +22,5 @@ const createPhoto = () => ({
 
 const createPhotos = () => Array.from({ length: PHOTO_DESCRIPTION_COUNT}, createPhoto);
 
-export {createPhotos};
+export {createPhotos, PHOTO_DESCRIPTION_COUNT};
 
