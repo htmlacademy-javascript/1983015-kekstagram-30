@@ -1,6 +1,5 @@
 import { isEscapeKey } from './util';
-import { pictures } from './render-pictures';
-import './render-big-picture.js';
+import { picturesContainer } from './render-pictures';
 
 const bodyContainer = document.querySelector('body');
 const overlayBigPicture = document.querySelector('.big-picture');
@@ -16,7 +15,7 @@ const onPictureEscKeydown = (evt) => {
 };
 
 const openBigPicture = (evt) => {
-  if (evt.target.closest('.picture')) {
+  if (evt.target.closest('.picture').dataset.photoId) {
     evt.preventDefault();
     overlayBigPicture.classList.remove('hidden');
     bodyContainer.classList.add('modal-open');
@@ -26,14 +25,16 @@ const openBigPicture = (evt) => {
   }
 };
 
+
 const closeBigPicture = () => {
   overlayBigPicture.classList.add('hidden');
   bodyContainer.classList.remove('modal-open');
   document.removeEventListener('keydown', onPictureEscKeydown);
 };
 
-pictures.addEventListener('click', openBigPicture);
+picturesContainer.addEventListener('click', openBigPicture);
 
 overlayBigPictureClose.addEventListener('click', closeBigPicture);
 
-export { overlayBigPicture };
+export { openBigPicture };
+
