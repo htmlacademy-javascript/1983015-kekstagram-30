@@ -12,7 +12,7 @@ const generateCommentId = createIdGenerator();
 const createMessage = () => Array.from({length: getRandomInteger(MIN_MESSAGE, MAX_MESSAGE)}, () => getRandomArrayElement(MESSAGES)).join(' ');
 
 const createComment = () => ({
-  commentId: generateCommentId(),
+  id: generateCommentId(),
   avatar: `img/avatar-${getRandomInteger(AVATAR_MIN_NUMBER, AVATAR_MAX_NUMBER)}.svg`,
   message: createMessage(),
   name: getRandomArrayElement(NAMES)
