@@ -13,7 +13,7 @@ const generatePhotoId = createIdGenerator();
 const generatePhotoUrl = createIdGenerator();
 
 const createPhoto = () => ({
-  photoId: generatePhotoId(),
+  id: generatePhotoId(),
   url: `photos/${generatePhotoUrl()}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInteger(LIKE_MIN_QUANTITY, LIKE_MAX_QUANTITY),
