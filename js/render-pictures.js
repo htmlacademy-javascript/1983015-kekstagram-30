@@ -35,5 +35,5 @@ const renderPictures = (photoArray) => {
   picturesContainer.append(pictureFragment);
 };
 
-export { renderPictures };
+export {renderPictures};
 
