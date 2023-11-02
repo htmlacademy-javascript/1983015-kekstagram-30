@@ -1,5 +1,5 @@
 import { renderBigPicture } from './render-overlay-picture.js';
-import { openBigPicture } from './on-pictures-click.js';
+import { openBigPicture} from './on-pictures-click.js';
 
 const picturesContainer = document.querySelector('.pictures');
 const picturesTitle = document.querySelector('.pictures__title');
