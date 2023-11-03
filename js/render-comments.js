@@ -19,7 +19,7 @@ const renderComments = (commentsArray) => {
     const comments = renderComment(commentItem);
     commentFragment.append(comments);
   });
-  commentContainer.append(commentFragment);
+  return commentFragment;
 };
 
 export {renderComments, commentContainer};
