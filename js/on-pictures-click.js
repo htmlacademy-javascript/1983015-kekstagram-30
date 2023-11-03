@@ -11,8 +11,6 @@ const onPictureEscKeydown = (evt) => {
   }
 };
 
-//const getPhotoObjectFromArrayById = (idPhoto, photos) => photos.find((photo) => photo.id === Number(idPhoto));
-
 const openBigPicture = (evt) => {
   evt.preventDefault();
   if (evt.target.closest('.picture')) {
@@ -27,6 +25,7 @@ const closeBigPicture = () => {
   bodyContainer.classList.remove('modal-open');
   document.removeEventListener('keydown', onPictureEscKeydown);
 };
-overlayBigPictureClose.addEventListener('click', closeBigPicture);
-export { openBigPicture, overlayBigPicture};
 
+overlayBigPictureClose.addEventListener('click', closeBigPicture);
+
+export { openBigPicture, overlayBigPicture};
