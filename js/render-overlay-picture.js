@@ -1,12 +1,11 @@
 import { renderComments, commentContainer } from './render-comments.js';
-import { overlayBigPicture } from './on-pictures-click';
+import { overlayBigPicture} from './on-pictures-click';
 
 const START_COMMENT_COUNT = 5;
 
 const countComment = overlayBigPicture.querySelector('.social__comment-count');
 const commentLoader = overlayBigPicture.querySelector('.comments-loader');
 const commentTotalCount = overlayBigPicture.querySelector('.social__comment-total-count');
-//const commentShownCount = overlayBigPicture.querySelector('.social__comment-shown-count');
 let commentStart = 0;
 
 const renderOverlayPicture = ({ url, description, likes, comments }) => {
@@ -18,9 +17,6 @@ const renderOverlayPicture = ({ url, description, likes, comments }) => {
   commentTotalCount.textContent = comments.length;
   const commentsCount = comments.length;
 
-  //countComment.classList.remove('hidden');
-  //commentLoader.classList.remove('hidden');
-
   const upDateComment = () => {
     commentStart += START_COMMENT_COUNT;
     if (commentStart >= commentsCount) {
@@ -31,8 +27,9 @@ const renderOverlayPicture = ({ url, description, likes, comments }) => {
       commentLoader.classList.remove('hidden');
       commentLoader.addEventListener('click', upDateComment);
     }
+
     commentContainer.innerHTML = '';
-    commentContainer.append(renderComments(comments.slice(0, commentsCount)));
+    commentContainer.append(renderComments(comments.slice(0, commentStart)));
     countComment.innerHTML = `${commentStart} из <span class="social__comment-total-count">${commentsCount}</span> комментариев`;
   };
 
@@ -45,9 +42,4 @@ const renderOverlayPicture = ({ url, description, likes, comments }) => {
   }
 };
 
-const renderBigPicture = (data) => {
-  renderOverlayPicture(data);
-  renderComments(data.comments);
-
-};
-export { renderBigPicture };
+export { renderOverlayPicture};
