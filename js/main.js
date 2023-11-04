@@ -1,5 +1,5 @@
 import {createPhotos, PHOTO_DESCRIPTION_COUNT} from './create-photos.js';
 
-import { renderPictures } from './render-pictures.js';
-renderPictures(createPhotos(PHOTO_DESCRIPTION_COUNT));
+import { renderGallery } from './render-gallery.js';
+renderGallery(createPhotos(PHOTO_DESCRIPTION_COUNT));
 
