@@ -13,16 +13,15 @@ const renderComment = ({ avatar, message, name }) => {
 
 const renderComments = (commentsArray) => {
   commentContainer.innerHTML = '';
-
   const commentFragment = document.createDocumentFragment();
 
   commentsArray.forEach((commentItem) => {
     const comments = renderComment(commentItem);
     commentFragment.append(comments);
   });
-  commentContainer.append(commentFragment);
+  return commentFragment;
 };
 
-export {renderComments};
+export {renderComments, commentContainer};
 
 
