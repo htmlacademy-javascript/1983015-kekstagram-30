@@ -16,6 +16,10 @@ const showEditingForm = () => {
   document.addEventListener('keydown', onImgEscKeydown);
 };
 
+const onShowFormButtonClick = () => {
+  showEditingForm();
+};
+
 const closeEditingForm = () => {
   imgUploadOverlay.classList.add('hidden');
   bodyContainer.classList.remove('modal-open');
@@ -34,6 +38,6 @@ function onImgEscKeydown(evt) {
   }
 }
 
-imgUploadInput.addEventListener('change', showEditingForm);
+imgUploadInput.addEventListener('change', onShowFormButtonClick);
 
 imgUploadCancelButton.addEventListener('click', onCloseFormButtonClick);
