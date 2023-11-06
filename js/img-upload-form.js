@@ -1,14 +1,14 @@
 import { isEscapeKey } from './util.js';
-import {bodyContainer} from './overlay-pictures.js';
+import { bodyContainer } from './overlay-pictures.js';
 
-const form = document.querySelector('.img-upload__form');
+const imgUploadForm = document.querySelector('.img-upload__form');
 
 //const imgUploadSubmitButton = imgUploadForm.querySelector('.img-upload__submit');
 //imgUploadSubmitButton.disabled = true;
 
-const imgUploadOverlay = form.querySelector('.img-upload__overlay');
-const imgUploadCancelButton = form.querySelector('.img-upload__cancel');
-const imgUploadInput = form.querySelector('.img-upload__input ');
+const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
+const imgUploadCancelButton = imgUploadForm.querySelector('.img-upload__cancel');
+const imgUploadInput = imgUploadForm.querySelector('.img-upload__input ');
 
 const showEditingForm = () => {
   imgUploadOverlay.classList.remove('hidden');
@@ -34,6 +34,7 @@ const onCloseFormButtonClick = () => {
 function onImgEscKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
+    //evt.stopPropagation();
     closeEditingForm();
   }
 }
@@ -41,3 +42,5 @@ function onImgEscKeydown(evt) {
 imgUploadInput.addEventListener('change', onShowFormButtonClick);
 
 imgUploadCancelButton.addEventListener('click', onCloseFormButtonClick);
+
+export {imgUploadForm};
