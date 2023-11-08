@@ -79,6 +79,14 @@ pristine.addValidator(
   3,
   true
 );
+// ВАЛИДАЦИЯ ДЛЯ КОММЕНТАРИЕВ В ФАЙЛЕ INDEX (ПРИ ПОМОЩИ DATA-АТРИБУТОВ),
+//НЕ ПОКАЗЫВАЕТСЯ СООБЩЕНИЕ С ОШИБКОЙ В ФОРМЕ (ЕСЛИ В INDEX ИЛИ ЗДЕСЬ, ПРОСТО НЕ ДАЕТ ДАЛЬШЕ ПЕЧАТАТЬ, А СООБЩЕНИЕ НЕ ПОКАЗЫВАЕТСЯ)
+/*const checkCommentLength = (comments) => comments.length <= 140;
+pristine.addValidator(
+  textComments,
+  checkCommentLength,
+  'Длина комментария больше 140 символов'
+);*/
 
 const onCloseFormButtonClick = () => {
   closeEditingForm();
