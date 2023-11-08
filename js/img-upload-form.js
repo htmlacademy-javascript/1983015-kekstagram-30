@@ -36,7 +36,7 @@ const closeEditingForm = () => {
 const isFieldFocused = () => document.activeElement === textHashtags || document.activeElement === textComments;
 
 function onImgEscKeydown(evt) {
-  if (isEscapeKey(evt) && isFieldFocused()) {
+  if (isEscapeKey(evt) && !isFieldFocused()) {
     evt.preventDefault();
     closeEditingForm();
   }
