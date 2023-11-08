@@ -73,4 +73,4 @@ const openPicture = (photoData) => {
 
 overlayPictureClose.addEventListener('click', onClosePictureButtonClick);
 
-export { openPicture };
+export { openPicture, bodyContainer };
