@@ -1,11 +1,11 @@
 import { isEscapeKey } from './util.js';
 import { bodyContainer } from './overlay-pictures.js';
+import { resetScale } from './scale.js';
+import { effectSliderElement } from './slider.js';
 
 const NUMBER_OF_HASHTAGS = 5;
 const REXEXP_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
 
-//const imgUploadSubmitButton = imgUploadForm.querySelector('.img-upload__submit');
-//imgUploadSubmitButton.disabled = true;
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancelButton = imgUploadForm.querySelector('.img-upload__cancel');
@@ -28,6 +28,8 @@ const showEditingForm = () => {
 const closeEditingForm = () => {
   imgUploadForm.reset();
   pristine.reset();
+  resetScale();
+  effectSliderElement.classList.add('hidden');
   imgUploadOverlay.classList.add('hidden');
   bodyContainer.classList.remove('modal-open');
   document.removeEventListener('keydown', onImgEscKeydown);
