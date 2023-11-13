@@ -1,8 +1,9 @@
 import { isEscapeKey } from './util.js';
-import { renderComments, commentContainer } from './render-comments.js';
+import { renderComments } from './render-comments.js';
 
 const START_COMMENT_COUNT = 5;
 
+const commentContainer = document.querySelector('.social__comments');
 const overlayBigPicture = document.querySelector('.big-picture');
 const bodyContainer = document.querySelector('body');
 const overlayPictureClose = overlayBigPicture.querySelector('.big-picture__cancel');
