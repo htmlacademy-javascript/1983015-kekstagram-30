@@ -1,11 +1,11 @@
 import { isEscapeKey } from './util.js';
-import { bodyContainer } from './overlay-pictures.js';
 import { resetScale } from './scale.js';
-import { effectSliderElement } from './slider.js';
+import { initEffect, resetEffect} from './slider.js';
 
 const NUMBER_OF_HASHTAGS = 5;
 const REXEXP_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
 
+const bodyContainer = document.querySelector('body');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancelButton = imgUploadForm.querySelector('.img-upload__cancel');
@@ -29,7 +29,7 @@ const closeEditingForm = () => {
   imgUploadForm.reset();
   pristine.reset();
   resetScale();
-  effectSliderElement.classList.add('hidden');
+  resetEffect();
   imgUploadOverlay.classList.add('hidden');
   bodyContainer.classList.remove('modal-open');
   document.removeEventListener('keydown', onImgEscKeydown);
@@ -55,7 +55,6 @@ const checkUniqueHashtags = (value) => {
   return loserCaseHashtags.length === new Set(loserCaseHashtags).size;
 };
 
-//введён невалидный хэш-тег
 pristine.addValidator(
   textHashtags,
   checkValidateHashtag,
@@ -64,7 +63,6 @@ pristine.addValidator(
   true
 );
 
-//превышено количество хэш-тегов
 pristine.addValidator(
   textHashtags,
   checkHashtagListLength,
@@ -73,7 +71,6 @@ pristine.addValidator(
   true
 );
 
-//хэш-теги повторяются
 pristine.addValidator(
   textHashtags,
   checkUniqueHashtags,
@@ -81,14 +78,14 @@ pristine.addValidator(
   3,
   true
 );
-// ВАЛИДАЦИЯ ДЛЯ КОММЕНТАРИЕВ В ФАЙЛЕ INDEX (ПРИ ПОМОЩИ DATA-АТРИБУТОВ),
-//НЕ ПОКАЗЫВАЕТСЯ СООБЩЕНИЕ С ОШИБКОЙ В ФОРМЕ (ЕСЛИ В INDEX ИЛИ ЗДЕСЬ, ПРОСТО НЕ ДАЕТ ДАЛЬШЕ ПЕЧАТАТЬ, А СООБЩЕНИЕ НЕ ПОКАЗЫВАЕТСЯ)
-/*const checkCommentLength = (comments) => comments.length <= 140;
+
+const checkCommentLength = (comments) => comments.length <= 140;
+
 pristine.addValidator(
   textComments,
   checkCommentLength,
   'Длина комментария больше 140 символов'
-);*/
+);
 
 const onCloseFormButtonClick = () => {
   closeEditingForm();
@@ -108,3 +105,4 @@ imgUploadForm.addEventListener('submit', onFormSubmit);
 imgUploadInput.addEventListener('change', onShowFormInputChange);
 
 imgUploadCancelButton.addEventListener('click', onCloseFormButtonClick);
+initEffect();
