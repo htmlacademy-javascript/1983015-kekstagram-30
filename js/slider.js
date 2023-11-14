@@ -141,9 +141,10 @@ const updateSlider = ({ min, max, step }) => {
 const changeSlider = () => {
   if (isDefault()) {
     closeSlider();
+  } else {
+    updateSlider(effectToSliderOptions[chosenEffect]);
+    showSlider();
   }
-  updateSlider(effectToSliderOptions[chosenEffect]);
-  showSlider();
 };
 
 const changeEffect = (effect) => {
@@ -152,12 +153,12 @@ const changeEffect = (effect) => {
   setImageStyle();
 };
 
-const onEffectChoose = (evt) => {
-  changeEffect(evt.target.value);
-};
-
 const resetEffect = () => {
   changeEffect(effectList.DEFAULT);
+};
+
+const onEffectChoose = (evt) => {
+  changeEffect(evt.target.value);
 };
 
 const initEffect = () => {
