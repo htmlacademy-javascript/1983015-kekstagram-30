@@ -1,9 +1,16 @@
 import { isEscapeKey } from './util.js';
+import { showMessageError, showMessageSuccess } from './form-message.js';
 import { resetScale } from './scale.js';
-import { initEffect, resetEffect} from './slider.js';
+import { initEffect, resetEffect } from './slider.js';
+import { sendPicture } from './api.js';
 
 const NUMBER_OF_HASHTAGS = 5;
 const REXEXP_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
+
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
+};
 
 const bodyContainer = document.querySelector('body');
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -12,6 +19,7 @@ const imgUploadCancelButton = imgUploadForm.querySelector('.img-upload__cancel')
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input ');
 const textHashtags = imgUploadForm.querySelector('.text__hashtags');
 const textComments = imgUploadForm.querySelector('.text__description');
+const submitButton = imgUploadForm.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -37,8 +45,10 @@ const closeEditingForm = () => {
 
 const isFieldFocused = () => document.activeElement === textHashtags || document.activeElement === textComments;
 
+const isErrorMessageExists = () => Boolean(document.querySelector('.error'));
+
 function onImgEscKeydown(evt) {
-  if (isEscapeKey(evt) && !isFieldFocused()) {
+  if (isEscapeKey(evt) && !isFieldFocused() && !isErrorMessageExists) {
     evt.preventDefault();
     closeEditingForm();
   }
@@ -95,14 +105,39 @@ const onShowFormInputChange = () => {
   showEditingForm();
 };
 
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
 };
 
-imgUploadForm.addEventListener('submit', onFormSubmit);
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
+const onFormSubmit = (onSuccess) => {
+  imgUploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendPicture(new FormData(evt.target))
+        .then(onSuccess)
+        .then(showMessageSuccess)
+        .catch(
+          (err) => {
+            showMessageError(err.message);
+          }
+        )
+        .finally(unblockSubmitButton);
+    }
+  });
+};
 
 imgUploadInput.addEventListener('change', onShowFormInputChange);
 
 imgUploadCancelButton.addEventListener('click', onCloseFormButtonClick);
 initEffect();
+
+export {onFormSubmit, closeEditingForm};
