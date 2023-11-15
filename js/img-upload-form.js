@@ -115,48 +115,29 @@ const unblockSubmitButton = () => {
   submitButton.textContent = SubmitButtonText.IDLE;
 };
 
-const sendForm = async (formElement) => {
-  if (!pristine.validate()) {
-    return;
-  }
-  try {
-    blockSubmitButton();
-    await sendPicture(new FormData(formElement));
-    unblockSubmitButton();
-    closeEditingForm();
-    showMessageSuccess();
-  } catch {
-    showMessageError();
-    unblockSubmitButton();
-  }
+const onFormSubmit = (onSuccess) => {
+  imgUploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendPicture(new FormData(evt.target))
+        .then(onSuccess)
+        .then(showMessageSuccess)
+        .catch(
+          (err) => {
+            showMessageError(err.message);
+          }
+        )
+        .finally(unblockSubmitButton);
+    }
+  });
 };
-
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  sendForm(evt.target);
-};
-
-/*const onFormSubmit = (onSuccess, evt) => {
-  evt.preventDefault();
-  const isValid = pristine.validate();
-  if (isValid) {
-    blockSubmitButton();
-    sendPicture(new FormData(evt.target))
-      .then(onSuccess);
-    closeEditingForm();
-    showMessageSuccess()
-      .catch(
-        (err) => {
-          showMessageError(err.message);
-        }
-      )
-      .finally(unblockSubmitButton);
-  }
-};*/
-
-imgUploadForm.addEventListener('submit', onFormSubmit);
 
 imgUploadInput.addEventListener('change', onShowFormInputChange);
 
 imgUploadCancelButton.addEventListener('click', onCloseFormButtonClick);
 initEffect();
+
+export {onFormSubmit, closeEditingForm};
