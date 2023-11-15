@@ -1,14 +1,20 @@
-const getRandomInteger = (min, max) => {
-  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
-  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-};
-
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+const DATA_ERROR_SHOW_TIME = 5000;
+const errorDataTemplate = document.querySelector('#data-error')
+  .content.querySelector('.data-error');
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
+const showDataError = () => {
+  const dataError = errorDataTemplate.cloneNode(true);
+  document.body.append(dataError);
 
-export {getRandomInteger, getRandomArrayElement, isEscapeKey };
+  setTimeout(() => {
+    dataError.remove();
+  }, DATA_ERROR_SHOW_TIME);
+};
+
+export {
+  isEscapeKey,
+  showDataError
+};
 
