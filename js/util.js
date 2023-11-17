@@ -13,8 +13,27 @@ const showDataError = () => {
   }, DATA_ERROR_SHOW_TIME);
 };
 
+const shufflePictures = (photos) => {
+  const copyPhotos = photos.slice();
+  for (let i = photos.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copyPhotos[i], copyPhotos[j]] = [copyPhotos[j], copyPhotos[i]];
+  }
+  return copyPhotos;
+};
+
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
 export {
   isEscapeKey,
-  showDataError
+  showDataError,
+  debounce,
+  shufflePictures,
 };
 

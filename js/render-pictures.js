@@ -3,7 +3,7 @@ picturesTitle.classList.remove('visually-hidden');
 const pictureTemplate = document.querySelector('#picture')
   .content.querySelector('.picture');
 
-const renderPicture = ({ url, description, comments, likes, id}) => {
+const renderPicture = ({ url, description, comments, likes, id }) => {
   const thumbnail = pictureTemplate.cloneNode(true);
   thumbnail.querySelector('.picture__img').src = url;
   thumbnail.querySelector('.picture__img').alt = description;
@@ -25,5 +25,5 @@ const renderPictures = (photos, containerThumbnails) => {
   containerThumbnails.append(pictureFragment);
 };
 
-export {renderPictures};
+export { renderPictures };
 
