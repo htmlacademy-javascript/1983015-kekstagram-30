@@ -14,14 +14,12 @@ const showDataError = () => {
 };
 
 const shufflePictures = (photos) => {
+  const copyPhotos = photos.slice();
   for (let i = photos.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [photos[i], photos[j]] = [photos[j], photos[i]];
+    [copyPhotos[i], copyPhotos[j]] = [copyPhotos[j], copyPhotos[i]];
   }
-};
-
-const sortPictures = (photos) => {
-  photos.sort((a, b) => b.comments.length - a.comments.length);
+  return copyPhotos;
 };
 
 const debounce = (callback, timeoutDelay) => {
@@ -35,8 +33,7 @@ const debounce = (callback, timeoutDelay) => {
 export {
   isEscapeKey,
   showDataError,
+  debounce,
   shufflePictures,
-  sortPictures,
-  debounce
 };
 
