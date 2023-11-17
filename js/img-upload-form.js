@@ -1,7 +1,7 @@
 import { isEscapeKey } from './util.js';
 import { showMessageError, showMessageSuccess } from './form-message.js';
 import { resetScale } from './scale.js';
-import { initEffect, resetEffect } from './slider.js';
+import { initEffect, resetEffect } from './sliderEffect.js';
 import { sendPicture } from './api.js';
 
 const NUMBER_OF_HASHTAGS = 5;
