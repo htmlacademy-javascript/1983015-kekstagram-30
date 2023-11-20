@@ -19,9 +19,9 @@ const closePicture = () => {
   document.removeEventListener('keydown', onPictureEscKeydown);
 };
 
-function onClosePictureButtonClick() {
+const onClosePictureButtonClick = () => {
   closePicture();
-}
+};
 
 function onPictureEscKeydown(evt) {
   if (isEscapeKey(evt)) {

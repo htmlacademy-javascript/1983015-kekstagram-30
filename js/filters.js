@@ -2,6 +2,7 @@ import { renderGallery } from './render-gallery.js';
 import { debounce, shufflePictures } from './util.js';
 
 const RANDOM_PHOTO_COUNT = 10;
+const RERENDER_DELAY = 500;
 
 const filterContainer = document.querySelector('.img-filters');
 
@@ -36,19 +37,22 @@ const drawFilters = (evt, filter, pictures) => {
   activateFilters(evt);
 };
 
-const debouncedSetFilters = debounce(drawFilters);
+const debouncedSetFilters = debounce(drawFilters, RERENDER_DELAY);
 
 const initFilters = (pictures) => {
   filterContainer.classList.remove('img-filters--inactive');
 
   filtersButtonDefault.addEventListener('click', (evt) => {
     debouncedSetFilters(evt, FilterType.DEFAULT, pictures);
+    activateFilters(evt);
   });
   filtersButtonRandom.addEventListener('click', (evt) => {
     debouncedSetFilters(evt, FilterType.RANDOM, pictures);
+    activateFilters(evt);
   });
   filtersButtonDiscussed.addEventListener('click', (evt) => {
     debouncedSetFilters(evt, FilterType.DISCUSSED, pictures);
+    activateFilters(evt);
   });
 };
 

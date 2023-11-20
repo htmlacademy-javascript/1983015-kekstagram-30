@@ -3,6 +3,7 @@ import { showMessageError, showMessageSuccess } from './form-message.js';
 import { resetScale } from './scale.js';
 import { initEffect, resetEffect } from './slider-effect.js';
 import { sendPicture } from './api.js';
+import { onFileInputChange } from './add-picture.js';
 
 const NUMBER_OF_HASHTAGS = 5;
 const REXEXP_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -16,7 +17,7 @@ const bodyContainer = document.querySelector('body');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancelButton = imgUploadForm.querySelector('.img-upload__cancel');
-const imgUploadInput = imgUploadForm.querySelector('.img-upload__input ');
+const imgUploadFile = imgUploadForm.querySelector('.img-upload__input');
 const textHashtags = imgUploadForm.querySelector('.text__hashtags');
 const textComments = imgUploadForm.querySelector('.text__description');
 const submitButton = imgUploadForm.querySelector('.img-upload__submit');
@@ -48,7 +49,7 @@ const isFieldFocused = () => document.activeElement === textHashtags || document
 const isErrorMessageExists = () => Boolean(document.querySelector('.error'));
 
 function onImgEscKeydown(evt) {
-  if (isEscapeKey(evt) && !isFieldFocused() && !isErrorMessageExists) {
+  if (isEscapeKey(evt) && !isFieldFocused() && !isErrorMessageExists()) {
     evt.preventDefault();
     closeEditingForm();
   }
@@ -103,6 +104,7 @@ const onCloseFormButtonClick = () => {
 
 const onShowFormInputChange = () => {
   showEditingForm();
+  onFileInputChange();
 };
 
 const blockSubmitButton = () => {
@@ -135,7 +137,7 @@ const onFormSubmit = (onSuccess) => {
   });
 };
 
-imgUploadInput.addEventListener('change', onShowFormInputChange);
+imgUploadFile.addEventListener('change', onShowFormInputChange);
 
 imgUploadCancelButton.addEventListener('click', onCloseFormButtonClick);
 initEffect();
