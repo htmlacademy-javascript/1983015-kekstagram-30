@@ -1,7 +1,6 @@
 import { openPicture } from './overlay-pictures.js';
 import { renderPictures } from './render-pictures.js';
 
-
 const containerThumbnails = document.querySelector('.pictures');
 
 const renderGallery = (photos) => {
