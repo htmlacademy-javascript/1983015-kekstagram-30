@@ -111,16 +111,9 @@ const createSlider = ({ min, max, step }) => {
     step,
     connect: 'lower',
     format: {
-      to: function (value) {
-        if (Number.isInteger(value)) {
-          return value.toFixed(0);
-        }
-        return value.toFixed(1);
-      },
-      from: function (value) {
-        return parseFloat(value);
-      },
-    },
+      to: (value) => Number(value),
+      from: (value) => Number(value),
+    }
   });
 
   effectSlider.noUiSlider.on('update', onSliderUpdate);
