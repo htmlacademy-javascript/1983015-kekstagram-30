@@ -1,11 +1,10 @@
 import { renderGallery } from './render-gallery.js';
-import { debounce, shufflePictures } from './util.js';
+import { shufflePictures, debounce } from './util.js';
 
 const RANDOM_PHOTO_COUNT = 10;
 const RERENDER_DELAY = 500;
 
 const filterContainer = document.querySelector('.img-filters');
-
 const imgFiltersForm = filterContainer.querySelector('.img-filters__form');
 const filtersButtonDefault = imgFiltersForm.querySelector('#filter-default');
 const filtersButtonRandom = imgFiltersForm.querySelector('#filter-random');
