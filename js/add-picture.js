@@ -1,7 +1,3 @@
-import { showEditingForm } from './img-upload-form.js';
-//import { initScale } from './scale.js';
-//import { initEffect} from './slider-effect.js';
-
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -22,10 +18,6 @@ const onFileInputChange = () => {
       preview.style.backgroundImage = `url('${imgUploadPreview.src}')`;
     });
   }
-  //initScale();
-  //initEffect();
-  //addValidators();
-  showEditingForm();
 };
 
 export {onFileInputChange};

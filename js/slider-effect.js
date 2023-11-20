@@ -48,7 +48,7 @@ const effectToSliderOptions = {
   [effectList.MARVIN]: {
     min: 0,
     max: 100,
-    step: 0.1
+    step: 1
   },
   [effectList.PHOBOS]: {
     min: 0,
