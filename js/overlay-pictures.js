@@ -8,7 +8,7 @@ const bodyContainer = document.querySelector('body');
 const overlayPictureClose = overlayBigPicture.querySelector('.big-picture__cancel');
 const commentCount = overlayBigPicture.querySelector('.social__comment-count');
 const commentShownCount = overlayBigPicture.querySelector('.social__comment-shown-count');
-const commentLoader = overlayBigPicture.querySelector('.comments-loader');
+const commentButtonLoader = overlayBigPicture.querySelector('.comments-loader');
 const commentTotalCount = overlayBigPicture.querySelector('.social__comment-total-count');
 
 const commentTemplate = document.querySelector('#comment')
@@ -47,9 +47,9 @@ const renderComments = () => {
   commentStart += START_COMMENT_COUNT;
   if (commentStart >= comments.length) {
     commentStart = comments.length;
-    commentLoader.classList.add('hidden');
+    commentButtonLoader.classList.add('hidden');
   } else {
-    commentLoader.classList.remove('hidden');
+    commentButtonLoader.classList.remove('hidden');
   }
 
   const commentFragment = document.createDocumentFragment();
@@ -85,7 +85,7 @@ const openPicture = (photoData) => {
     renderComments();
   } else {
     commentContainer.innerHTML = '';
-    commentLoader.classList.add('hidden');
+    commentButtonLoader.classList.add('hidden');
     commentCount.innerHTML = 'К этой фотографии нет комментариев.';
   }
 
@@ -93,6 +93,6 @@ const openPicture = (photoData) => {
 };
 
 overlayPictureClose.addEventListener('click', onClosePictureButtonClick);
-commentLoader.addEventListener('click', onCommentsButtonClick);
+commentButtonLoader.addEventListener('click', onCommentsButtonClick);
 
 export { openPicture };
