@@ -1,15 +1,31 @@
+import { showEditingForm } from './img-upload-form.js';
+//import { initScale } from './scale.js';
+//import { initEffect} from './slider-effect.js';
+
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadFile = imgUploadForm.querySelector('.img-upload__input');
 const imgUploadPreview = imgUploadForm.querySelector('.img-upload__preview img');
+const effetcsPreview = imgUploadForm.querySelectorAll('.effects__preview');
 
-imgUploadFile.addEventListener('change', () => {
-  const file = imgUploadFile.files[0];
+const isValidType = (file) => {
   const fileName = file.name.toLowerCase();
+  return FILE_TYPES.some((it) => fileName.endsWith(it));
+};
 
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-  if (matches) {
+const onFileInputChange = () => {
+  const file = imgUploadFile.files[0];
+  if (file && isValidType(file)) {
     imgUploadPreview.src = URL.createObjectURL(file);
+    effetcsPreview.forEach((preview) => {
+      preview.style.backgroundImage = `url('${imgUploadPreview.src}')`;
+    });
   }
-});
+  //initScale();
+  //initEffect();
+  //addValidators();
+  showEditingForm();
+};
+
+export {onFileInputChange};
