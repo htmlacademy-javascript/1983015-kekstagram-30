@@ -53,7 +53,7 @@ const renderComments = () => {
   }
 
   const commentFragment = document.createDocumentFragment();
-  for(let i = 0; i < commentStart; i++) {
+  for (let i = 0; i < commentStart; i++) {
     const comment = renderComment(comments[i]);
     commentFragment.append(comment);
   }
