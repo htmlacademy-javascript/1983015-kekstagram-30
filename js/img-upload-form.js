@@ -7,6 +7,7 @@ import { onFileInputChange } from './add-picture.js';
 
 const NUMBER_OF_HASHTAGS = 5;
 const REXEXP_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
+const COMMENT_LENGTH_COUNT = 140;
 
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
@@ -90,7 +91,7 @@ pristine.addValidator(
   true
 );
 
-const checkCommentLength = (comments) => comments.length <= 140;
+const checkCommentLength = (comments) => comments.length <= COMMENT_LENGTH_COUNT;
 
 pristine.addValidator(
   textComments,
